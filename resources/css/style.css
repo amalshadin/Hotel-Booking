@@ -1,0 +1,24 @@
+.title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+}
+
+.hyperlink {
+    -fx-text-fill: #2196F3;
+}
+
+.text-field {
+    -fx-pref-width: 200;
+    -fx-max-width: 200;
+    -fx-min-width: 200;
+}
+.text-field:focused {
+    -fx-border-color: #2196F3;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px
+}
