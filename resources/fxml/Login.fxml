@@ -2,14 +2,31 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
 
 <VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.LoginController">
+      xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.LoginController" styleClass="mainLoginVBox">
+    <HBox>
+        <VBox styleClass="login-left-plane">
+            <Label>Create A New Account !</Label>
+            <Button text="Register" onAction="#goToRegister"/>
+        </VBox>
+        <VBox styleClass="login-right-plane">
+            <Label styleClass="appName">Coral Castle</Label>
+            <ImageView fitWidth="200" fitHeight="150" preserveRatio="true">
+                <image>
+                    <Image url="@/images/logo.png"/>
+                </image>
+            </ImageView>
 
-    <Label text="Login" styleClass="title"/>
-    <TextField fx:id="usernameField" styleClass="text-field" promptText="Username"/>
-    <PasswordField fx:id="passwordField" styleClass="text-field" promptText="Password"/>
-    <Label fx:id="messageLabel" textFill="red"/>
-    <Button text="Login" onAction="#handleLogin"/>
-    <Hyperlink text="Don't have an account? Register" onAction="#goToRegister"/>
+            <Label text="Login" styleClass="title"/>
+            <TextField fx:id="usernameField" styleClass="text-field" promptText="Username"/>
+            <PasswordField fx:id="passwordField" styleClass="text-field" promptText="Password"/>
+            <Label fx:id="messageLabel" textFill="red"/>
+            <Button text="Login" onAction="#handleLogin"/>
+        </VBox>
+    </HBox>
 </VBox>
+

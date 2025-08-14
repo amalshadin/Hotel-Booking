@@ -1,3 +1,17 @@
+.mainLoginVBox {
+    /*-fx-background-color: #F5F5DC;*/
+    -fx-pref-width: 800px;
+    -fx-pref-height: 600px;
+    -fx-background-image: url("/images/bg2.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover; /* Makes the image cover the entire area */
+    -fx-background-position: center center; /* Center the image */
+}
+
+.appName {
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+}
 .title {
     -fx-font-size: 20px;
     -fx-font-weight: bold;
@@ -20,5 +34,11 @@
 .text-field:focused {
     -fx-border-color: #2196F3;
     -fx-border-width: 2px;
-    -fx-border-radius: 5px
+    -fx-border-radius: 3px
+}
+
+.dashboardVBox{
+        -fx-background-color: white;
+        -fx-pref-width: 800px;
+        -fx-pref-height: 600px;
 }

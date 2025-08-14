@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.RegisterController">
+      xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.RegisterController" styleClass="loginRegisterVBox">
 
     <Label text="Register" styleClass="title"/>
     <TextField fx:id="usernameField" promptText="Choose a username"/>
