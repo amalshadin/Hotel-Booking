@@ -4,9 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+
+import com.hotelbooking.main.controllers.LoginController;
+import com.hotelbooking.main.uicomponents.ImagePanel;
+
 import net.miginfocom.swing.MigLayout;
 
 public class LoginUI extends JFrame {
+    private final JTextField usernameField;
+    private final JPasswordField passwordField;
+
     public LoginUI() {
         // --- Frame Setup (No changes here) ---
         this.setSize(new Dimension(1024, 576));
@@ -23,9 +30,8 @@ public class LoginUI extends JFrame {
         ));
         loginPanel.setBackground(Color.WHITE);
 
-        // --- Right Panel for Register/Image ---
-        JPanel registerPanel = new JPanel();
-        registerPanel.setBackground(Color.WHITE); // Can be used for an image or registration form
+        // --- Right Panel for Image ---
+        JPanel loginImagePanel = new ImagePanel("/loginImage.jpg");
 
         // --- Login Component Declaration ---
         JLabel welcomeBackLabel = new JLabel("Welcome Back");
@@ -36,10 +42,15 @@ public class LoginUI extends JFrame {
         loginSubLabel.setFont(new Font("SansSerif", Font.PLAIN, 14));
         loginSubLabel.setForeground(Color.GRAY);
 
-        JTextField usernameField = new JTextField();
-        JPasswordField passwordField = new JPasswordField();
+        //Instantiating Username and password fields
+        usernameField = new JTextField();
+        passwordField = new JPasswordField();
         JButton loginButton = new JButton("Login");
         JButton forgotPasswordButton = new JButton("Forgot Password?");
+
+        JPanel registerPanel = new JPanel(new FlowLayout());
+        JLabel registerLabel = new JLabel();
+        JButton register = new JButton("Register");
 
         // --- Add Placeholder Text functionality ---
         addPlaceholderStyle(usernameField, "Username");
@@ -70,16 +81,37 @@ public class LoginUI extends JFrame {
         loginButton.setForeground(Color.WHITE);
         loginButton.setFocusPainted(false);
         loginButton.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        loginButton.setActionCommand("login_user");
+        loginButton.addActionListener(new LoginController(this));
 
 
         // Style the "Forgot Password" button to look like a link
         forgotPasswordButton.setFont(new Font("SansSerif", Font.PLAIN, 12));
-        forgotPasswordButton.setForeground(new Color(0x002AFF));
+        forgotPasswordButton.setForeground(new Color(0x173DFF));
         forgotPasswordButton.setFocusPainted(false);
         forgotPasswordButton.setContentAreaFilled(false);
-        forgotPasswordButton.setBorder(null); // REMOVED: Border to make it look like a link
+        forgotPasswordButton.setBorder(null);
         forgotPasswordButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        // REMOVED: setEnabled(false) to make it clickable
+        forgotPasswordButton.setActionCommand("forgot_password");
+        forgotPasswordButton.addActionListener(new LoginController(this));
+
+        //Register button
+        registerPanel.setBackground(null);
+        registerLabel.setText("Don't have an account? ");
+        register.setForeground(Color.BLUE);
+        register.setBorder(null);
+        register.setFocusPainted(false);
+        register.setContentAreaFilled(false);
+        register.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        register.setActionCommand("register_user");
+        register.addActionListener(new LoginController(this));
+
+        this.addKeyListener(new LoginController(this));
+
+        //Add registration components to the registration panel in the login frame
+        registerPanel.add(registerLabel);
+        registerPanel.add(register);
+        registerPanel.add(forgotPasswordButton);
 
         // --- Adding components to the login panel ---
         loginPanel.add(welcomeBackLabel, "gapbottom 5"); // Add gap to the next component
@@ -88,12 +120,11 @@ public class LoginUI extends JFrame {
         loginPanel.add(passwordField, "growx, h 45!");
         loginPanel.add(forgotPasswordButton, "align right, gapbottom 15"); // Align to the right
         loginPanel.add(loginButton, "growx, h 45!");
+        loginPanel.add(registerPanel,"growx, h 45!");
 
         // --- Adding Panels to Frame ---
         this.add(loginPanel, "grow");
-        this.add(registerPanel, "grow");
-
-        // REMOVED: All the unnecessary .setVisible(true) calls
+        this.add(loginImagePanel, "grow");
     }
 
     /**
@@ -104,8 +135,7 @@ public class LoginUI extends JFrame {
         textField.setForeground(Color.GRAY);
 
         // Special handling for JPasswordField
-        if (textField instanceof JPasswordField) {
-            JPasswordField passwordField = (JPasswordField) textField;
+        if (textField instanceof JPasswordField passwordField) {
             passwordField.setEchoChar((char) 0); // Show placeholder text
         }
 
@@ -133,5 +163,17 @@ public class LoginUI extends JFrame {
             }
         });
     }
+
+    /**
+     * getter method for username and password
+     */
+
+    public String getUsername() {
+        return usernameField.getText().trim();
+    }
+    public char[] getPassword() {
+        return passwordField.getPassword();
+    }
+
 
 }
